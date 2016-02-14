@@ -14,7 +14,12 @@ class FabsController < ApplicationController
 
   # GET /fabs/new
   def new
-    @fab = Fab.new
+    if params[:user_id].nil?
+      @fab = Fab.new
+    else
+      @user = User.find(params[:user_id])
+      @fab = @user.upcoming_fab
+    end
   end
 
   # GET /fabs/1/edit

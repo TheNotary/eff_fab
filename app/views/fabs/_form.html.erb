@@ -2,10 +2,25 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :users_id %>
-    <%= f.file_field :gif_tag %>
+    <div>Period:
+      <span><%= @fab.present_period %></span>
+    </div>
+    <div>User:
+      <span><%= @user.email %></span>
+    </div>
+
+    <!-- FIXME:  This requires the notes scaffolding -->
+    <div>More Things????
+
+    </div>
+
+
+    <div>Gif Tag:
+      <%= f.file_field :gif_tag %>
+    </div>
   </div>
 
+  <br>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

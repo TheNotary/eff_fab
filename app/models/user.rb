@@ -15,5 +15,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :fabs, reject_if: :all_blank, :allow_destroy => true
 
 
+  # this function returns the FAB due for the upcoming week, or builds it if
+  # no such fab already exists
+  def upcoming_fab
+    # FIXME: this is a stub
+    fabs.build
+  end
 
 end
