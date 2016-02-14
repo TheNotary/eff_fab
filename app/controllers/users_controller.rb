@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def secure_params
     params.require(:user).permit(:role,
-      {fabs_attributes: [:id, :gif_tag_file_name]}
+      fabs_attributes: [:id, :gif_tag_file_name, :_destroy]
     )
   end
 

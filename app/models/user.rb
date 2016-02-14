@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :fabs
+  accepts_nested_attributes_for :fabs, reject_if: :all_blank, :allow_destroy => true
 
-  accepts_nested_attributes_for :fabs
+
 
 end

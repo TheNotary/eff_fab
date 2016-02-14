@@ -1,8 +1,7 @@
-
-
 <p>
   <%= f.label :gif_tag_file_name, "Gif" %>
   <%= f.text_field :gif_tag_file_name %>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove" %>
+  <%= f.remove_nested_fields_link %>
+  <%# link_to_remove_association "remove task", f %>
+
 </p>
