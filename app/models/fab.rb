@@ -6,6 +6,24 @@ class Fab < ActiveRecord::Base
   validates_attachment_content_type :gif_tag, content_type: /\Aimage\/.*\Z/
 
   belongs_to :user
+  has_many :notes
+
+  accepts_nested_attributes_for :notes, reject_if: :all_blank, :allow_destroy => true
+
+  after_initialize :setup_children
+
+  def setup_children
+    3.times { notes.build(forward: true)}
+    3.times { notes.build(forward: false)}
+  end
+
+  def forward
+    notes.where(forward: true)
+  end
+
+  def backward
+    notes.where(forward: false)
+  end
 
   def period
     # FIXME: this method needs to be changed into a database column
@@ -25,5 +43,5 @@ class Fab < ActiveRecord::Base
     s
   end
 
-  
+
 end

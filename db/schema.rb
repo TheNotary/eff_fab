@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211025416) do
+ActiveRecord::Schema.define(version: 20160214184826) do
 
   create_table "fabs", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20160211025416) do
     t.string   "gif_tag_content_type"
     t.integer  "gif_tag_file_size"
     t.datetime "gif_tag_updated_at"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "fab_id"
+    t.text     "body"
+    t.boolean  "forward"
+    t.boolean  "achievement"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
