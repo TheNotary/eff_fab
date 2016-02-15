@@ -1,10 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div>
   <strong>Users:</strong>
   <%= @fab.user_id %>
   <%= image_tag @fab.gif_tag.url %>
 </p>
 
-<%= link_to 'Edit', edit_fab_path(@fab) %> |
-<%= link_to 'Back', fabs_path %>
+
+  <!--  FIXME: make dry with helper-->
+  <div>
+    <strong>Back</strong>
+    (<%= @fab.display_back_time_span %>):
+    <% @fab.backward.each do |note| %>
+      <%= render 'note_content', :note => note %>
+    <% end %>
+  </div>
+
+  <div>
+    <strong>Forward</strong>
+    (<%= @fab.display_forward_time_span %>):
+    <% @fab.forward.each do |note| %>
+      <%= render 'note_content', :note => note %>
+    <% end %>
+  </div>
+
+
+  <div>
+    <strong>Gif Tag:</strong>
+    <%= image_tag @fab.gif_tag.url %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_user_fab_path %> |
+<%= link_to 'Back', user_fabs_path %>

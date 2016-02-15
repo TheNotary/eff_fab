@@ -1,5 +1,6 @@
 class FabsController < ApplicationController
   before_action :set_fab, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /fabs
   # GET /fabs.json
@@ -14,7 +15,7 @@ class FabsController < ApplicationController
 
   # GET /fabs/new
   def new
-    @fab = Fab.new
+    @fab = @user.fabs.find_or_build_this_periods_fab
   end
 
   # GET /fabs/1/edit
@@ -24,11 +25,11 @@ class FabsController < ApplicationController
   # POST /fabs
   # POST /fabs.json
   def create
-    @fab = Fab.new(fab_params)
+    @fab = @user.fabs.new(fab_params)
 
     respond_to do |format|
       if @fab.save
-        format.html { redirect_to @fab, notice: 'Fab was successfully created.' }
+        format.html { redirect_to [@user, @fab], notice: 'Fab was successfully created.' }
         format.json { render :show, status: :created, location: @fab }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class FabsController < ApplicationController
   def update
     respond_to do |format|
       if @fab.update(fab_params)
-        format.html { redirect_to @fab, notice: 'Fab was successfully updated.' }
+        format.html { redirect_to [@user, @fab], notice: 'Fab was successfully updated.' }
         format.json { render :show, status: :ok, location: @fab }
       else
         format.html { render :edit }
@@ -67,10 +68,14 @@ class FabsController < ApplicationController
       @fab = Fab.find(params[:id])
     end
 
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def fab_params
-      params.require(:fab).permit(:user_id, :gif_tag,
-        notes_attributes: [:id, :body, :_destroy]
+      params.require(:fab).permit(:user_id, :gif_tag, :period,
+        notes_attributes: [:id, :body, :forward, :_destroy]
       )
     end
 end

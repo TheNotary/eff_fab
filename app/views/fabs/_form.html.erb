@@ -1,17 +1,36 @@
-<%= simple_form_for(@fab) do |f| %>
+<%= simple_form_for([@user, @fab]) do |f| %>
   <%= f.error_notification %>
+  <%= f.hidden_field :period, value: @fab.period %>
 
   <div class="form-inputs">
     <div>Period:
-      <span><%= @fab.present_period %></span>
+      <span><%= @fab.display_back_time_span %></span>
     </div>
     <div>User:
       <span><%= @user.email %></span>
     </div>
 
     <!-- FIXME:  This requires the notes scaffolding -->
-    <div>More Things????
+    <!-- FIXME:  Go over rails helpers with Squiggy, make DRY -->
+    <div>Back (<%= @fab.display_back_time_span %>):
+      <% @fab.backward.each do |x| %>
+        <div class="nested-fields"</div>
+          <%= f.fields_for(:notes, x) do |builder| %>
+            <%= render 'note_fields', :f => builder, :x => x %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
+    <!-- FIXME:  This requires the notes scaffolding -->
+    <div>Forward (<%= @fab.display_forward_time_span %>):
+      <% @fab.forward.each do |x| %>
+        <div class="nested-fields"</div>
+          <%= f.fields_for(:notes, x) do |builder| %>
+            <%= render 'note_fields', :f => builder, :x => x %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
 

@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # no such fab already exists
   def upcoming_fab
     # FIXME: this is a stub
-    fabs.build
+    fabs.find_or_create_this_periods_fab
   end
 
 end
