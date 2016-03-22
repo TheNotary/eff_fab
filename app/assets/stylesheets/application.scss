@@ -17,6 +17,7 @@
 @import "variables.scss";
 @import "fabs.scss";
 @import "scaffolds.scss";
+@import "clean_picker.scss";
 
 // Users....
 
@@ -24,17 +25,31 @@
   margin-bottom: 20px;
 }
 
-.leet-filter-button-selected,
-.leet-filter-button-selected:focus
-{
-    background-color: #000;
-    outline: 0;
-}
+// .leet-filter-button-selected,
+// .leet-filter-button-selected:focus
+// {
+//     background-color: #000;
+//     outline: 0;
+// }
 
 .leet-filter-button-selected::-moz-focus-inner {
   border: 0;
 }
 
+.app-nav {
+
+  li {
+    list-style: none;
+  }
+
+  a, a:visited {
+    text-decoration: none;
+    color: $font-color-normal;
+  }
+  a:hover {
+    color: blue;
+  }
+}
 
 
  body {
@@ -52,6 +67,7 @@ h1,h2,h3,h4,h5,h6 {
  p, ol, ul, td {
    font-size: 13px;
    line-height: 18px;
+   list-style: none;
  }
 
 pre {
@@ -75,24 +91,34 @@ pre {
 .forward-back {
   float: left;
   width: 42%;
+  .headish {
+    padding-bottom: 7px;
+  }
 }
 
 .fab-backward-btn,
 .fab-forward-btn {
+  text-decoration: none;
   font-weight: 900;
-  color: #889197;
-  background-color: #eff;
-  border-radius: 20px;
+  color: #fff;
+  background-color: #C70300;
+  border-radius: 50%;
   margin-top: 2.5em;
-  width: 3%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
   float: left;
+  text-align: center;
 }
 
 .fab-backward-btn:hover,
 .fab-forward-btn:hover {
-  background-color: #eff;
+  color: #fff;
+  background-color: #000;
   cursor: pointer;
+}
+
+.fab-backward-btn {
+  margin-left: -2em;
 }
 
 .fab-backward-btn:hover.disabled,
@@ -132,6 +158,7 @@ pre {
 
 a {
   color: $link-color;
+  text-decoration: underline;
 
   &:visited { color: $link-color; }
 
@@ -139,4 +166,41 @@ a {
     color: $link-color-hover;
     background-color: $link-bg-color-hover;
   }
+}
+
+
+.elegant a, .elegant a:visited {
+  text-decoration: none;
+  color: $font-color-normal;
+}
+.elegant a:hover {
+  color: blue;
+  background-color: $link-bg-color-hover;
+}
+
+
+.faked-link {
+  color: $font-color-normal;
+  cursor: pointer;
+
+  & > form > span {
+    margin-left: -1px;
+  }
+
+  button, input[type=submit], input[type=button] {
+    color:inherit;
+    margin-left: -2px;
+    background:none!important;
+    border:none;
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    cursor: inherit;
+  }
+
+  &:hover {
+    color: blue;
+    background-color: $link-bg-color-hover;
+  }
+
 }
