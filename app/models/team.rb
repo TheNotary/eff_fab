@@ -17,13 +17,14 @@ class Team < ActiveRecord::Base
     Team.new(name: "Team Runner Up", weight: 200)
   end
 
+  # A runner is a person who did not create their FAB passed in as target_period
   def self.get_runners(target_period = Fab.get_start_of_current_fab_period)
-    # target_period = Fab.get_start_of_current_fab_period # if target_period.nil?
-
+    # pick the date range we'll be search for fabs to be created in
     p1 = target_period.strftime("%Y-%m-%d")
     p2 = (target_period + 1.day).strftime("%Y-%m-%d")
 
-    # Note, you can flip those bits in the case to invert the function
+    # Note, you can flip those bits in the case to invert the function finding
+    # people who DID complete their fabs this period
     q = <<-EOT.strip_heredoc
 
       SELECT "users"."id", "users"."name"
