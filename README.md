@@ -59,8 +59,8 @@ Reminders and report_on_aftermath notifications are sent over email via `rake ma
 Drop in more images into `app/assets/images/banner_pool` to have them show up in that beautiful top banner.  If one image doesn't seem to work, it probably has a `+` sign or possibly something even more adventurous like a question mark, so try taking that out.  
 
 
-Credits
--------
-
 License
 -------
+
+GNU Affero General Public License
+http://www.gnu.org/licenses/agpl-3.0.en.html
