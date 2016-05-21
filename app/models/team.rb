@@ -1,3 +1,6 @@
+# All staff members are sorted by their Team, thus you'll note the /users
+# page addresses Team.all rather than User.all, enabling the virtual team of
+# "runner_ups" to exist and sort the staff members
 class Team < ActiveRecord::Base
   has_many :users
 
@@ -23,27 +26,8 @@ class Team < ActiveRecord::Base
     p1 = target_period.strftime("%Y-%m-%d")
     p2 = (target_period + 1.day).strftime("%Y-%m-%d")
 
-    # Note, you can flip those bits in the case to invert the function finding
-    # people who DID complete their fabs this period
-    q = <<-EOT.strip_heredoc
-
-      SELECT "users"."id", "users"."name"
-      FROM "users"
-        LEFT JOIN "fabs"
-        ON "fabs"."user_id" = "users"."id"
-        GROUP BY "users"."id"
-          HAVING max(
-            case
-              WHEN "fabs"."period" BETWEEN date('#{p1}') AND date('#{p2}') THEN
-                1
-              ELSE
-                0
-              END
-          ) = 0
-
-    EOT
-
-    runners = User.find_by_sql(q)
+    query_string = Sql::GetRunners.to_s(p1,p2)
+    runners = User.find_by_sql(query_string)
   end
 
 end
