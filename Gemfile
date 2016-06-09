@@ -10,7 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'nokogiri'
-gem 'aws-sdk', '< 2.0' if ENV['storage'] == "s3"
+gem 'aws-sdk', '< 2.0' # if ENV['storage'] == "s3"
 
 group :development, :test do
   gem 'byebug'
@@ -42,6 +42,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'pg'
 
   # Include database gems for the adapters found in the database
   # configuration settings key for production
