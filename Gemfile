@@ -4,7 +4,7 @@ ruby '2.3.1'
 gem 'rails', '4.2.6'
 gem 'puma'
 
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk', '< 2.0' # if ENV['storage'] == "s3"
 gem 'figaro'
 gem 'devise'
 
@@ -43,6 +43,25 @@ group :production do
   #gem 'mysql2'
   gem 'pg'
   gem 'rails_12factor'
+
+  # Include database gems for the adapters found in the database
+  # configuration settings key for production
+  require 'erb'
+  require 'yaml'
+  application_file = File.join(File.dirname(__FILE__), "config/application.yml")
+  if File.exist?(application_file)
+    application_config = YAML::load(ERB.new(IO.read(application_file)).result)
+    db_adapter = application_config['production']['db_adapter']
+    if db_adapter == "mysql2"
+      gem 'mysql2'
+    elsif db_adapter == "postgresql"
+      gem 'pg'
+    else
+      warn("No adapter found in config/application.yml, please configure it first")
+    end
+  else
+    warn("Please configure your config/application.yml first")
+  end
 end
 
 group :test do
