@@ -1,5 +1,28 @@
 (function() {
 
+  /***************************
+   *      BasicCarousel      *
+   ***************************/
+  /*
+    BasicCarousel is a library that allows you to cycle to previous/ subsequent
+    fabs by clicking left/ right arrows.
+
+    You can regester all elements of a compaitible class with
+
+        basicCarousel.register('.basic-carousel');
+
+    Valid HTML scheme will look something like this:
+
+      .basic-carousel
+        a.fab-backward-btn
+        a.fab-forward-btn
+        .forward
+        .back
+
+    As long as you have that basic structure you should be able to click the two
+    anchor elements and be able to cycle the .forward and .back elements to
+    to previous/ subsequent fabs.
+  */
   var BasicCarousel = function() {
 
     // apply this to a selector that will get divs...
@@ -46,19 +69,11 @@
 
       setCarouselToBusy();
 
-      // FIXME: OO refactor so the selectors aren't all brain fucks, then enable
-      // an initial shake animation via queing
-      // Shake the display so user knows what will change
-      // fab_encapsulator.children('.back').first().effect( "shake" );
-      // fab_encapsulator.children('.forward').first().effect( "shake" );
-
       requestCycledFab(direction, cycle_options, function(markup) {
         var options = JSON.parse(markup.split(';')[0]);
         var new_fab_id = options.fab_id;
         var new_fab_period = options.fab_period;
-        // var which_fabs_exist = options.neighbor_presence;
 
-        // disablePreviousOrNextBarsIfNeeded(which_fabs_exist);
         markup = markup.split(";").slice(1).join(";");
 
         populateFabInDisplay(markup, function(oldBackwardAndForward) {
@@ -132,24 +147,6 @@
       $(newColumn).show("slide", { direction: motionFrom }, 120);
     }
 
-
-    // DEPRICATED:
-    function disablePreviousOrNextBarsIfNeeded(which_fabs_exist) {
-      var previous_fab_exists = which_fabs_exist[0];
-      var next_fab_exists = which_fabs_exist[1];
-
-      if (previous_fab_exists)
-        fab_encapsulator.children('.fab-backward-btn').first().removeClass('disabled');
-      else
-        fab_encapsulator.children('.fab-backward-btn').first().addClass('disabled');
-
-      if (next_fab_exists)
-        fab_encapsulator.children('.fab-forward-btn').first().removeClass('disabled');
-      else
-        fab_encapsulator.children('.fab-forward-btn').first().addClass('disabled');
-    }
-
-
     function requestCycledFab(direction, cycle_options, cb) {
       var action = (direction == "forward") ? "/tools/next_fab?" : "/tools/previous_fab?"
       var query_list = [];
@@ -177,7 +174,7 @@
     }
 
     // removes the old forward notes, and overwrites the backward notes with
-    // the backward AND forward... kinda odd... javascript...
+    // the backward AND forward
     function populateFabInDisplay(markup, cb) {
       var ulElements = parseTheUlElementsFromServerResponse(markup);
 
