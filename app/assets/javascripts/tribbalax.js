@@ -115,7 +115,7 @@ var Tribbalax = function() {
 
 
   var requestTick = function() {
-    if (!ticking) {
+    if (!ticking && window.requestAnimationFrame) {
       window.requestAnimationFrame(updatePosition);
       window.requestAnimationFrame(menuCheck);
       ticking = true;

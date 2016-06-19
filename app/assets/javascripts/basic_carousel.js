@@ -117,8 +117,8 @@
           duration: 100,
           easing: "swing",
           complete: function() {
-            /* delete the elements */
-            notes[0].remove();
+            /* delete the element if it exists */
+            if (notes[0].remove) notes[0].remove();
             if (typeof cb === "function")
               cb();
           }
