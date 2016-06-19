@@ -24,6 +24,8 @@
     to previous/ subsequent fabs.
   */
   var BasicCarousel = function() {
+    var nextFabEndpoint = "/tools/next_fab";
+    var prevFabEndpoint = "/tools/previous_fab";
 
     // apply this to a selector that will get divs...
     // the divs must have a data-user-id and a data-fab-id
@@ -148,13 +150,13 @@
     }
 
     function requestCycledFab(direction, cycle_options, cb) {
-      var action = (direction == "forward") ? "/tools/next_fab?" : "/tools/previous_fab?"
+      var action = (direction == "forward") ? nextFabEndpoint : prevFabEndpoint
       var query_list = [];
       query_list.push("user_id=" + cycle_options.user_id);
       if (cycle_options.fab_period != undefined)
         query_list.push("fab_period=" + encodeURI(cycle_options.fab_period));
 
-      var url = action + query_list.join("&");
+      var url = action + '?' + query_list.join("&");
       return ajaxRequest(url, function(data) {
         cb(data);
       });
