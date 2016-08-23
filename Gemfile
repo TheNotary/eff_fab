@@ -60,7 +60,7 @@ group :production do
       warn("No adapter found in config/application.yml, please configure it first")
     end
   else
-    warn("Please configure your config/application.yml first")
+    warn("Please configure your config/application.yml first (or set env variable on target)")
   end
 end
 
