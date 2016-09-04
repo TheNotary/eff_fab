@@ -1,4 +1,4 @@
-Eff Fab
+EFF Fab
 ================
 
 This is a rails app built to make it easy for organizations with many users keep track of what they themselves are doing and what things their coworkers are up to.  
@@ -9,7 +9,7 @@ Getting Started
 
 Note:  These instructions assume you have experience deploying conventional rails apps.  
 
-Install dependencies, or use [mah vagrant box](https://github.com/TheNotary/ruby_vagrant_box).
+Install dependencies, or use [my vagrant box](https://github.com/TheNotary/ruby_vagrant_box).
 
 ```
 $  sudo apt-get install mysql-server libmysqlclient-dev imagemagic
