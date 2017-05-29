@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
-
 gem 'rails', '4.2.7.1'
-gem 'puma'
 
+gem 'puma'
 gem 'aws-sdk', '< 2.0' # if ENV['storage'] == "s3"
 gem 'figaro'
 gem 'devise'
@@ -31,8 +30,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'byebug'
-  # gem 'rack-mini-profiler'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
@@ -42,24 +39,8 @@ group :development, :test do
 end
 
 group :production do
-  require 'uri'
   gem 'rails_12factor'
-  #gem 'pg'
-
-  # Include database gems for the adapters found in the environment
-  if ENV['db_adapter'] || ENV['DATABASE_URL']
-
-    case ENV['db_adapter'] || URI.parse(ENV['DATABASE_URL']).scheme
-    when "mysql", "mysql2"
-      gem 'mysql2'
-    when "postgres"
-      gem 'pg'
-    else
-      warn("ERROR: Couldn't figure out what db_adapter to use by parsing the env var DATABASE_URL.")
-    end
-  else
-    warn("ERROR: Please configure your config/application.yml first (or set env variable on target)") unless File.exists?("config/application.yml")
-  end
+  gem 'mysql2'
 end
 
 group :test do
