@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.3.3'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 gem 'puma'
 
 gem 'aws-sdk', '< 2.0' # if ENV['storage'] == "s3"
@@ -15,9 +15,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'nokogiri'
-gem "paperclip", "~> 4.3"
 gem 'simple_form'
+gem "paperclip", "~> 4.3"
+gem 'nokogiri'
+gem 'sprockets', '3.6.3'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -28,6 +29,7 @@ group :development do
   gem 'rails_layout'
   gem 'spring-commands-rspec'
 end
+
 group :development, :test do
   gem 'byebug'
   # gem 'rack-mini-profiler'
@@ -40,27 +42,23 @@ group :development, :test do
 end
 
 group :production do
-  #gem 'mysql2'
-  gem 'pg'
+  require 'uri'
   gem 'rails_12factor'
+  #gem 'pg'
 
-  # Include database gems for the adapters found in the database
-  # configuration settings key for production
-  require 'erb'
-  require 'yaml'
-  application_file = File.join(File.dirname(__FILE__), "config/application.yml")
-  if File.exist?(application_file)
-    application_config = YAML::load(ERB.new(IO.read(application_file)).result)
-    db_adapter = application_config['production']['db_adapter']
-    if db_adapter == "mysql2"
+  # Include database gems for the adapters found in the environment
+  if ENV['db_adapter'] || ENV['DATABASE_URL']
+
+    case ENV['db_adapter'] || URI.parse(ENV['DATABASE_URL']).scheme
+    when "mysql", "mysql2"
       gem 'mysql2'
-    elsif db_adapter == "postgresql"
+    when "postgres"
       gem 'pg'
     else
-      warn("No adapter found in config/application.yml, please configure it first")
+      warn("ERROR: Couldn't figure out what db_adapter to use by parsing the env var DATABASE_URL.")
     end
   else
-    warn("Please configure your config/application.yml first (or set env variable on target)")
+    warn("ERROR: Please configure your config/application.yml first (or set env variable on target)") unless File.exists?("config/application.yml")
   end
 end
 
