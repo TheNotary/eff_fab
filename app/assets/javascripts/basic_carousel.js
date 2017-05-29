@@ -131,7 +131,7 @@
       notes.animate({
           left: (base_dist * polarity)
         }, {
-          duration: 100,
+          duration: 200,
           easing: "swing",
           complete: function() {
             /* delete the element if it exists */
@@ -146,7 +146,7 @@
     function animateEntry(newColumn, direction) {
       var motionFrom = direction === "forward" ? "right" : "left";
 
-      $(newColumn).show("slide", { direction: motionFrom }, 120);
+      $(newColumn).show("slide", { direction: motionFrom }, 400);
     }
 
     function requestCycledFab(direction, cycle_options, cb) {
