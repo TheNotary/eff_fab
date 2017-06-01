@@ -55,6 +55,7 @@ def import_sample_users_and_teams(debug_mode)
   sample_users.map do |u|
     u[:password] = User.generate_password
     u[:team] = get_team(u[:team])
+    u[:email] = u[:email].sub(/\@eff\.org$/, "@#{ENV['domain_name']}")
     u = User.create(u)
     build_fabs(u) if debug_mode
     u
