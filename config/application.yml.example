@@ -25,6 +25,7 @@ domain_name: 'fab.eff.org'
 ########################
 
 mail_server: 'smtp.example.com'
+mail_from_domain: 'example.com'
 mail_port: '587'
 mail_authentication: "login"
 mail_enable_starttls_auto: 'true'
