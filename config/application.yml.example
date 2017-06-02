@@ -11,7 +11,7 @@ time_zone: 'Pacific Time (US & Canada)'
 # Typical Rails Stuff #
 #######################
 
-admin_name: John Doe
+admin_name: 'John Doe'
 admin_email: 'user@example.com'
 admin_password: 'password'
 
@@ -26,8 +26,9 @@ domain_name: 'fab.eff.org'
 
 mail_server: 'smtp.example.com'
 mail_from_domain: 'example.com'
+mail_fab_sender_address: 'fab@eff.org'
 mail_port: '587'
-mail_authentication: "login"
+mail_authentication: 'login'
 mail_enable_starttls_auto: 'true'
 mail_user_name: ''
 mail_password: ''
