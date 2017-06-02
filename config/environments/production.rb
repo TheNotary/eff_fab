@@ -71,19 +71,6 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  config.action_mailer.smtp_settings = {
-    address: ENV['mail_server'],
-    port: ENV['mail_port'].to_i,
-    domain: ENV['mail_from_domain'],
-    authentication: ENV['mail_authentication'] && ENV['mail_authentication'].to_sym,
-    enable_starttls_auto: ENV['mail_enable_starttls_auto'],
-    user_name: ENV['mail_user_name'],
-    password: ENV['mail_password']
-  }
-
-  # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => ENV['domain_name'], :protocol => 'https' }
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 

@@ -11,7 +11,9 @@
       <p>
         You still haven't done your FAB!!!  Plz plz plz, just do that thing!
       </p>
-      <p><a href="<%= ditto = new_user_fab_url(@user, host: ENV['domain_name'], protocol: 'https') %>"> <%= ditto %></a></p>
+      <p>
+        <%= link_to nil, new_user_fab_url(@user) %>
+      </p>
     <% else %>
       <p>You did your FAB, that's great!!!!</p>
     <% end %>
